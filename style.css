@@ -4,49 +4,21 @@ body {
   color: #333;
   font-family: Lato, sans-serif;
 }
-.aaa {
-  width: 500px;
-  margin: 0 auto;
-  display: block;
-  text-align: right;
-}
-.aaa img {
-  width: 100%;
-}
-.aaa .more_inf {
-  font-family: fantasy, cursive;
-}
 
-@media (max-width: 768px) {
-  .aaa {
-    text-align: center;
-  }
-}
-.centered-main-page-element {
-  display: block;
-  width: 500px;
-  margin: 0 auto 0;
-}
-.task {
-  width: 56%;
-  display: inline-block;
-  flex-grow: 1;
-}
-.task-row-wrapper {
-  display: flex;
-}
 ul {
   margin: 0;
   padding: 0px;
 }
-li,
-h3 {
+
+li {
   list-style: none;
 }
+
 input,
 button {
   outline: none;
 }
+
 button {
   background: none;
   border: 0px;
@@ -56,11 +28,12 @@ button {
   font-family: Lato, sans-serif;
   cursor: pointer;
 }
+
 button:hover {
   color: #3a3a3a;
 }
-/* Heading */
-h3,
+
+h2,
 label[for='new-task'] {
   color: #333;
   font-weight: 700;
@@ -70,6 +43,7 @@ label[for='new-task'] {
   margin: 0;
   text-transform: uppercase;
 }
+
 input[type='text'] {
   margin: 0;
   font-size: 18px;
@@ -82,21 +56,63 @@ input[type='text'] {
   font-family: Lato, sans-serif;
   color: #888;
 }
+
 input[type='text']:focus {
   color: #333;
 }
 
-/* New Task */
-label[for='new-task'] {
+.hidden {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+
+.header {
+  width: 500px;
+  margin: 0 auto;
+  display: block;
+  text-align: right;
+}
+
+.header__img {
+  width: 100%;
+}
+
+.header__info {
+  font-family: fantasy, cursive;
+}
+
+@media (max-width: 768px) {
+  .header {
+    text-align: center;
+  }
+}
+
+.main {
+  display: block;
+  width: 500px;
+  margin: 0 auto 0;
+}
+
+.add-task__row {
+  display: flex;
+}
+
+.add-task__label {
   display: block;
   margin: 0 0 20px;
 }
-input#new-task {
-  width: 318px;
+
+.add-task__input {
+  flex-grow: 1;
 }
 
 /* Task list */
-li {
+.todo__item {
   overflow: hidden;
   padding: 20px 0;
   border-bottom: 1px solid #eee;
@@ -105,28 +121,33 @@ li {
   justify-content: space-between;
   align-items: center;
 }
-li > * {
+
+.todo__item > * {
   vertical-align: middle;
 }
 
-li > input[type='checkbox'] {
+.todo__checkbox {
   margin: 0 10px;
 }
-li > label {
+
+.todo__label {
   padding-left: 10px;
   box-sizing: border-box;
   font-size: 18px;
   width: 226px;
 }
-li > input[type='text'] {
+
+.todo__input {
   width: 226px;
 }
-button.delete img {
+
+.delete-btn img {
   height: 2em;
   transform: rotateZ(45deg);
   transition: transform 200ms ease-in;
 }
-button.delete img:hover {
+
+.delete-btn img:hover {
   transform: rotateZ(0);
 }
 
@@ -141,11 +162,11 @@ ul li input[type='text'] {
   display: none;
 }
 
-ul li.editMode input[type='text'] {
+ul li.edit-mode input[type='text'] {
   display: inline-block;
   width: 224px;
 }
 
-ul li.editMode label {
+ul li.edit-mode label {
   display: none;
 }
