@@ -16,18 +16,16 @@ const completedTasksHolder = document.getElementById('completed-tasks'); //compl
 const createNewTaskElement = function (taskString) {
   const listItem = document.createElement('li');
 
-  //input (checkbox)
-  const checkBox = document.createElement('input'); //checkbx
-  //label
-  const label = document.createElement('label'); //label
+  const checkBox = document.createElement('input');
+  const label = document.createElement('label');
   //input (text)
-  const editInput = document.createElement('input'); //text
+  const editInput = document.createElement('input');
   //button.edit
-  const editButton = document.createElement('button'); //edit button
+  const editButton = document.createElement('button');
 
   //button.delete
-  const deleteButton = document.createElement('button'); //delete button
-  const deleteButtonImg = document.createElement('img'); //delete button image
+  const deleteButton = document.createElement('button');
+  const deleteButtonImg = document.createElement('img');
 
   label.innerText = taskString;
   label.className = 'task';
@@ -76,8 +74,6 @@ const editTask = function () {
   const containsClass = listItem.classList.contains('editMode');
   //If class of the parent is .editmode
   if (containsClass) {
-    //switch to .editmode
-    //label becomes the inputs value.
     label.innerText = editInput.value;
     editBtn.innerText = 'Edit';
   } else {
