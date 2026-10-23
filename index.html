@@ -47,14 +47,16 @@
           </button>
         </li>
         <li class="edit-mode">
-          <input type="checkbox" id="go-shopping" /><label
-            class="task"
-            for="go-shopping"
-            >Go Shopping</label
-          ><input type="text" value="Go Shopping" class="task" /><button
-            class="edit"
-          >
-            Save</button
+          <input
+            type="checkbox"
+            id="go-shopping"
+            class="edit-mode__checkbox"
+          /><label class="edit-mode__label" for="go-shopping">Go Shopping</label
+          ><input
+            type="text"
+            value="Go Shopping"
+            class="edit-mode__input"
+          /><button class="edit-btn">Save</button
           ><button class="delete-btn">
             <img src="./remove.svg" alt="Remove Task" />
           </button>
@@ -68,7 +70,8 @@
             checked
             id="see-doctor"
             class="todo__checkbox"
-          /><label class="todo__label" for="see-doctor">See the Doctor</label
+          /><label class="todo__label todo__label_completed" for="see-doctor"
+            >See the Doctor</label
           ><input
             type="text"
             class="todo__input"

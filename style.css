@@ -12,6 +12,12 @@ ul {
 
 li {
   list-style: none;
+  overflow: hidden;
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 input,
@@ -34,7 +40,7 @@ button:hover {
 }
 
 h2,
-label[for='new-task'] {
+.add-task__label {
   color: #333;
   font-weight: 700;
   font-size: 15px;
@@ -59,6 +65,10 @@ input[type='text'] {
 
 input[type='text']:focus {
   color: #333;
+}
+
+li > input[type='checkbox'] {
+  margin: 0 10px;
 }
 
 .hidden {
@@ -131,13 +141,20 @@ input[type='text']:focus {
 }
 
 .todo__label {
+  flex-grow: 1;
   padding-left: 10px;
   box-sizing: border-box;
   font-size: 18px;
   width: 226px;
 }
 
+.todo__label_completed {
+  text-decoration: line-through;
+  color: #888;
+}
+
 .todo__input {
+  display: none;
   width: 226px;
 }
 
@@ -151,22 +168,11 @@ input[type='text']:focus {
   transform: rotateZ(0);
 }
 
-/* Completed */
-ul#completed-tasks label {
-  text-decoration: line-through;
-  color: #888;
-}
-
-/* Edit Task */
-ul li input[type='text'] {
-  display: none;
-}
-
-ul li.edit-mode input[type='text'] {
+.edit-mode__input {
+  flex: 1 1 224px;
   display: inline-block;
-  width: 224px;
 }
 
-ul li.edit-mode label {
+.edit-mode__label {
   display: none;
 }
