@@ -7,10 +7,10 @@
 
 // Event handling, user interaction is what starts the code execution.
 
-const taskInput = document.getElementById('new-task'); //Add a new task.
-const addButton = document.getElementsByTagName('button')[0]; //first button
-const incompleteTaskHolder = document.getElementById('incompleteTasks'); //ul of #incompleteTasks
-const completedTasksHolder = document.getElementById('completed-tasks'); //completed-tasks
+const taskInput = document.getElementById('new-task');
+const addButton = document.getElementsByTagName('button')[0];
+const incompleteTaskHolder = document.getElementById('incompleteTasks');
+const completedTasksHolder = document.getElementById('completed-tasks');
 
 //New task list item
 const createNewTaskElement = function (taskString) {
@@ -18,36 +18,27 @@ const createNewTaskElement = function (taskString) {
 
   const checkBox = document.createElement('input');
   const label = document.createElement('label');
-  //input (text)
   const editInput = document.createElement('input');
-  //button.edit
   const editButton = document.createElement('button');
-
-  //button.delete
   const deleteButton = document.createElement('button');
   const deleteButtonImg = document.createElement('img');
 
   label.innerText = taskString;
   label.className = 'task';
 
-  //Each elements, needs appending
   checkBox.type = 'checkbox';
   editInput.type = 'text';
   editInput.className = 'task';
 
-  editButton.innerText = 'Edit'; //innerText encodes special characters, HTML does not.
+  editButton.innerText = 'Edit';
   editButton.className = 'edit';
 
   deleteButton.className = 'delete';
   deleteButtonImg.src = './remove.svg';
-  deleteButton.appendChild(deleteButtonImg);
+  deleteButton.append(deleteButtonImg);
 
-  //and appending.
-  listItem.appendChild(checkBox);
-  listItem.appendChild(label);
-  listItem.appendChild(editInput);
-  listItem.appendChild(editButton);
-  listItem.appendChild(deleteButton);
+  listItem.append(checkBox, label, editInput, editButton, deleteButton);
+
   return listItem;
 };
 
@@ -72,7 +63,7 @@ const editTask = function () {
   const label = listItem.querySelector('label');
   const editBtn = listItem.querySelector('.edit');
   const containsClass = listItem.classList.contains('editMode');
-  //If class of the parent is .editmode
+
   if (containsClass) {
     label.innerText = editInput.value;
     editBtn.innerText = 'Edit';
@@ -81,69 +72,49 @@ const editTask = function () {
     editBtn.innerText = 'Save';
   }
 
-  //toggle .editmode on the parent.
   listItem.classList.toggle('editMode');
 };
 
 //Delete task.
 const deleteTask = function () {
   const listItem = this.parentNode;
-  const ul = listItem.parentNode;
-  //Remove the parent list item from the ul.
-  ul.removeChild(listItem);
+  listItem.remove();
 };
 
 //Mark task completed
 const taskCompleted = function () {
-  //Append the task list item to the #completed-tasks
   const listItem = this.parentNode;
   completedTasksHolder.appendChild(listItem);
   bindTaskEvents(listItem, taskIncomplete);
 };
 
 const taskIncomplete = function () {
-  //Mark task as incomplete.
-  //When the checkbox is unchecked
-  //Append the task list item to the #incompleteTasks.
   const listItem = this.parentNode;
   incompleteTaskHolder.appendChild(listItem);
   bindTaskEvents(listItem, taskCompleted);
 };
 
 const ajaxRequest = function () {};
-
-//The glue to hold it all together.
-
-//Set the click handler to the addTask function.
 addButton.onclick = addTask;
 addButton.addEventListener('click', addTask);
 addButton.addEventListener('click', ajaxRequest);
 
 const bindTaskEvents = function (taskListItem, checkBoxEventHandler) {
-  //select ListItems children
   const checkBox = taskListItem.querySelector('input[type=checkbox]');
   const editButton = taskListItem.querySelector('button.edit');
   const deleteButton = taskListItem.querySelector('button.delete');
 
-  //Bind editTask to edit button.
   editButton.onclick = editTask;
-  //Bind deleteTask to delete button.
   deleteButton.onclick = deleteTask;
-  //Bind taskCompleted to checkBoxEventHandler.
   checkBox.onchange = checkBoxEventHandler;
 };
 
-//cycle over incompleteTaskHolder ul list items
-//for each list item
-for (let i = 0; i < incompleteTaskHolder.children.length; i++) {
-  //bind events to list items chldren(tasksCompleted)
-  bindTaskEvents(incompleteTaskHolder.children[i], taskCompleted);
+for (const task of incompleteTaskHolder.children) {
+  bindTaskEvents(task, taskCompleted);
 }
 
-//cycle over completedTasksHolder ul list items
-for (let i = 0; i < completedTasksHolder.children.length; i++) {
-  //bind events to list items chldren(tasksIncompleted)
-  bindTaskEvents(completedTasksHolder.children[i], taskIncomplete);
+for (const task of completedTasksHolder.children) {
+  bindTaskEvents(task, taskIncomplete);
 }
 
 // Issues with usability don't get seen until they are in front of a human tester.

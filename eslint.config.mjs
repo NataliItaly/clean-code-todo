@@ -15,6 +15,8 @@ export default [
       'no-var': 'error',
       'prefer-const': 'error',
       'no-console': 'error',
+      'no-unused-vars': 'error',
+      'no-unreachable': 'error',
     },
   },
 ];
