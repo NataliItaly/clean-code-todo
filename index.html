@@ -33,6 +33,9 @@
       <h2>Todo</h2>
       <ul id="incomplete-tasks" class="todo">
         <li class="todo__item">
+          <label class="hidden" for="pay-bills"
+            >Checkbox for task pay-bills</label
+          >
           <input type="checkbox" id="pay-bills" class="todo__checkbox" /><label
             class="todo__label"
             for="pay-bills"
@@ -46,10 +49,13 @@
           </button>
         </li>
         <li class="edit-mode">
+          <label class="hidden" for="go-shopping"
+            >Checkbox for task go-shopping</label
+          >
           <input
             type="checkbox"
             id="go-shopping"
-            class="edit-mode__checkbox"
+            class="todo__checkbox"
           /><label class="todo__label" for="go-shopping">Go Shopping</label
           ><input type="text" value="Go Shopping" class="todo__input" /><button
             class="edit-btn"

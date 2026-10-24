@@ -6,33 +6,47 @@ const completedTasksHolder = document.getElementById('completed-tasks');
 //New task list item
 const createNewTaskElement = function (taskString) {
   const listItem = document.createElement('li');
+  const id = crypto.randomUUID();
+
+  const checkboxLabel = document.createElement('label');
+  checkboxLabel.innerText = `Checkbox for task ${taskString}`;
+  checkboxLabel.classList.add('hidden');
+  checkboxLabel.htmlFor = `task-${id}`;
 
   const checkBox = document.createElement('input');
-  const label = document.createElement('label');
-  const editInput = document.createElement('input');
-  const editButton = document.createElement('button');
-  const deleteButton = document.createElement('button');
-  const deleteButtonImg = document.createElement('img');
+  checkBox.type = 'checkbox';
+  checkBox.id = `task-${id}`;
+  checkBox.classList.add('todo__checkbox');
 
-  const id = crypto.randomUUID();
+  const label = document.createElement('label');
   label.innerText = taskString;
   label.classList.add('todo__label');
-  label.for = id;
-  checkBox.type = 'checkbox';
-  checkBox.classList.add('todo__checkbox');
+  label.htmlFor = id;
+
+  const editInput = document.createElement('input');
   editInput.type = 'text';
   editInput.classList.add('todo__input');
   editInput.id = id;
 
+  const editButton = document.createElement('button');
   editButton.innerText = 'Edit';
   editButton.className = 'edit-btn';
 
+  const deleteButton = document.createElement('button');
+  const deleteButtonImg = document.createElement('img');
   deleteButton.className = 'delete-btn';
   deleteButtonImg.src = './remove.svg';
   deleteButton.alt = 'Delete Task';
   deleteButton.append(deleteButtonImg);
 
-  listItem.append(checkBox, label, editInput, editButton, deleteButton);
+  listItem.append(
+    checkboxLabel,
+    checkBox,
+    label,
+    editInput,
+    editButton,
+    deleteButton,
+  );
 
   return listItem;
 };
