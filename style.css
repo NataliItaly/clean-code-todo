@@ -169,11 +169,11 @@ li > input[type='checkbox'] {
   transform: rotateZ(0);
 }
 
-.edit-mode__input {
+.edit-mode .todo__input {
   flex: 1 1 224px;
   display: inline-block;
 }
 
-.edit-mode__label {
+.edit-mode .todo__label {
   display: none;
 }
