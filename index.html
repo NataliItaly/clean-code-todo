@@ -26,13 +26,12 @@
       <div class="add-task">
         <label for="new-task" class="add-task__label">Add Item</label>
         <div class="add-task__row">
-          <input id="new-task" class="add-task__input" type="text" /><button>
-            Add
-          </button>
+          <input id="new-task" class="add-task__input" type="text" />
+          <button id="add-new-task">Add</button>
         </div>
       </div>
       <h2>Todo</h2>
-      <ul id="incompleteTasks" class="todo">
+      <ul id="incomplete-tasks" class="todo">
         <li class="todo__item">
           <input type="checkbox" id="pay-bills" class="todo__checkbox" /><label
             class="todo__label"
@@ -63,15 +62,14 @@
         </li>
       </ul>
       <h2>Completed</h2>
-      <ul id="completed-tasks" class="todo">
+      <ul id="completed-tasks" class="todo todo_completed">
         <li class="todo__item">
           <input
             type="checkbox"
             checked
             id="see-doctor"
             class="todo__checkbox"
-          /><label class="todo__label todo__label_completed" for="see-doctor"
-            >See the Doctor</label
+          /><label class="todo__label" for="see-doctor">See the Doctor</label
           ><input
             type="text"
             class="todo__input"

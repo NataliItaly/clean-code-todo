@@ -148,14 +148,15 @@ li > input[type='checkbox'] {
   width: 226px;
 }
 
-.todo__label_completed {
-  text-decoration: line-through;
-  color: #888;
-}
-
 .todo__input {
   display: none;
   width: 226px;
+}
+
+.todo_completed .todo__label,
+.todo_completed input[type='text'] {
+  text-decoration: line-through;
+  color: #888;
 }
 
 .delete-btn img {
