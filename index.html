@@ -33,14 +33,12 @@
       <h2>Todo</h2>
       <ul id="incomplete-tasks" class="todo">
         <li class="todo__item">
-          <label class="hidden" for="pay-bills"
-            >Checkbox for task pay-bills</label
-          >
-          <input type="checkbox" id="pay-bills" class="todo__checkbox" /><label
+          <label class="hidden" for="task-1">Checkbox for task pay-bills</label>
+          <input type="checkbox" id="task-1" class="todo__checkbox" /><label
             class="todo__label"
-            for="pay-bills"
+            for="1"
             >Pay Bills</label
-          ><input type="text" class="todo__input" id="edit-pay-bills" /><button
+          ><input type="text" class="todo__input" id="1" /><button
             class="edit-btn"
           >
             Edit</button
@@ -49,18 +47,19 @@
           </button>
         </li>
         <li class="edit-mode">
-          <label class="hidden" for="go-shopping"
+          <label class="hidden" for="task-2"
             >Checkbox for task go-shopping</label
           >
-          <input
-            type="checkbox"
-            id="go-shopping"
-            class="todo__checkbox"
-          /><label class="todo__label" for="go-shopping">Go Shopping</label
-          ><input type="text" value="Go Shopping" class="todo__input" /><button
-            class="edit-btn"
-          >
-            Save</button
+          <input type="checkbox" id="task-2" class="todo__checkbox" /><label
+            class="todo__label"
+            for="2"
+            >Go Shopping</label
+          ><input
+            type="text"
+            value="Go Shopping"
+            class="todo__input"
+            id="2"
+          /><button class="edit-btn">Save</button
           ><button class="delete-btn">
             <img src="./remove.svg" alt="Remove Task" />
           </button>
@@ -69,17 +68,17 @@
       <h2>Completed</h2>
       <ul id="completed-tasks" class="todo todo_completed">
         <li class="todo__item">
-          <input
-            type="checkbox"
-            checked
-            id="see-doctor"
-            class="todo__checkbox"
-          /><label class="todo__label" for="see-doctor">See the Doctor</label
-          ><input
-            type="text"
-            class="todo__input"
-            id="edit-go-shopping"
-          /><button class="edit-btn">Edit</button
+          <label class="hidden" for="task-3"
+            >Checkbox for task see the Doctor</label
+          >
+          <input type="checkbox" checked id="3" class="todo__checkbox" /><label
+            class="todo__label"
+            for="task-3"
+            >See the Doctor</label
+          ><input type="text" class="todo__input" id="task-3" /><button
+            class="edit-btn"
+          >
+            Edit</button
           ><button class="delete-btn">
             <img src="./remove.svg" alt="Remove Task" />
           </button>

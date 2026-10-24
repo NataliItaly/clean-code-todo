@@ -68,16 +68,19 @@ const addTask = function () {
 const editTask = function () {
   const listItem = this.parentNode;
 
+  const checkboxLabel = listItem.querySelector('label.hidden');
   const editInput = listItem.querySelector('input[type=text]');
-  const label = listItem.querySelector('label');
+  const label = listItem.querySelector('.todo__label');
   const editBtn = listItem.querySelector('.edit-btn');
   const containsClass = listItem.classList.contains('edit-mode');
 
   if (containsClass) {
     label.innerText = editInput.value;
+    checkboxLabel.innerText = `Checkbox for task ${editInput.value}`;
     editBtn.innerText = 'Edit';
   } else {
     editInput.value = label.innerText;
+    checkboxLabel.innerText = `Checkbox for task ${editInput.value}`;
     editBtn.innerText = 'Save';
   }
 
