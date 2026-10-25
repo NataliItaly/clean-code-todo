@@ -31,12 +31,17 @@ const createNewTaskElement = function (taskString) {
   const editButton = document.createElement('button');
   editButton.innerText = 'Edit';
   editButton.className = 'edit-btn';
+  editButton.type = 'button';
+  editButton.ariaLabel = `Edit ${taskString} task`;
 
   const deleteButton = document.createElement('button');
   const deleteButtonImg = document.createElement('img');
   deleteButton.className = 'delete-btn';
+  deleteButton.type = 'button';
+  deleteButton.ariaLabel = `Delete ${taskString} task`;
+
   deleteButtonImg.src = './remove.svg';
-  deleteButton.alt = 'Delete Task';
+  deleteButtonImg.alt = 'Delete Task';
   deleteButton.append(deleteButtonImg);
 
   listItem.append(
@@ -78,10 +83,12 @@ const editTask = function () {
     label.innerText = editInput.value;
     checkboxLabel.innerText = `Checkbox for task ${editInput.value}`;
     editBtn.innerText = 'Edit';
+    editBtn.ariaLabel = `Edit ${editInput.value} task`;
   } else {
     editInput.value = label.innerText;
     checkboxLabel.innerText = `Checkbox for task ${editInput.value}`;
     editBtn.innerText = 'Save';
+    editBtn.ariaLabel = `Save ${editInput.value} task`;
   }
 
   listItem.classList.toggle('edit-mode');

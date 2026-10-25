@@ -71,16 +71,6 @@ li > input[type='checkbox'] {
   margin: 0 10px;
 }
 
-.hidden {
-  position: absolute;
-  clip: rect(1px, 1px, 1px, 1px);
-  padding: 0;
-  border: 0;
-  height: 1px;
-  width: 1px;
-  overflow: hidden;
-}
-
 .header {
   width: 500px;
   margin: 0 auto;
@@ -174,6 +164,13 @@ li > input[type='checkbox'] {
   display: inline-block;
 }
 
+.hidden,
 .edit-mode .todo__label {
-  display: none;
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
 }
