@@ -1,13 +1,18 @@
 /* Basic Style */
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: #f8f8f8;
   color: #333;
   font-family: Lato, sans-serif;
+  margin: 0;
 }
 
 ul {
   margin: 0;
-  padding: 0px;
+  padding: 0;
 }
 
 li {
@@ -20,14 +25,9 @@ li {
   align-items: center;
 }
 
-input,
-button {
-  outline: none;
-}
-
 button {
   background: none;
-  border: 0px;
+  border: none;
   color: #888;
   font-size: 15px;
   width: 60px;
@@ -35,7 +35,8 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+button:hover,
+button:focus-visible {
   color: #3a3a3a;
 }
 
@@ -55,24 +56,21 @@ input[type='text'] {
   font-size: 18px;
   line-height: 18px;
   height: 21px;
-  padding: 0 9px;
+  padding: 0 10px;
   border: 1px solid #ddd;
   background: #fff;
   border-radius: 6px;
   font-family: Lato, sans-serif;
-  color: #888;
+  color: #6a6a83;
 }
 
 input[type='text']:focus {
   color: #333;
 }
 
-li > input[type='checkbox'] {
-  margin: 0 10px;
-}
-
 .header {
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
   margin: 0 auto;
   display: block;
   text-align: right;
@@ -86,16 +84,12 @@ li > input[type='checkbox'] {
   font-family: fantasy, cursive;
 }
 
-@media (max-width: 768px) {
-  .header {
-    text-align: center;
-  }
-}
-
 .main {
   display: block;
-  width: 500px;
-  margin: 0 auto 0;
+  width: 100%;
+  max-width: 500px;
+  padding: 0 10px 20px;
+  margin: 0 auto;
 }
 
 .add-task__row {
@@ -122,25 +116,18 @@ li > input[type='checkbox'] {
   align-items: center;
 }
 
-.todo__item > * {
-  vertical-align: middle;
-}
-
 .todo__checkbox {
   margin: 0 10px;
 }
 
 .todo__label {
-  flex-grow: 1;
-  padding-left: 10px;
-  box-sizing: border-box;
+  flex: 1 1 225px;
+  padding: 0 10px;
   font-size: 18px;
-  width: 226px;
 }
 
 .todo__input {
   display: none;
-  width: 226px;
 }
 
 .todo_completed .todo__label,
@@ -155,13 +142,20 @@ li > input[type='checkbox'] {
   transition: transform 200ms ease-in;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .delete-btn img {
+    transition: none;
+  }
+}
+
 .delete-btn img:hover {
   transform: rotateZ(0);
 }
 
 .edit-mode .todo__input {
-  flex: 1 1 224px;
+  flex: 1 1 225px;
   display: inline-block;
+  min-width: 0;
 }
 
 .hidden,
@@ -173,4 +167,14 @@ li > input[type='checkbox'] {
   height: 1px;
   width: 1px;
   overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .header {
+    text-align: center;
+  }
+
+  .todo__checkbox {
+    margin: 0;
+  }
 }
