@@ -74,7 +74,7 @@ const addTask = function () {
 
   //Append listItem to incompleteTaskHolder
   incompleteTaskHolder.append(listItem);
-  bindTaskEvents(listItem, taskCompleted);
+  //bindTaskEvents(listItem, taskCompleted);
 
   const label = listItem.querySelector('.todo__label');
   const taskName = label.textContent;
@@ -106,7 +106,6 @@ const editTask = function () {
     checkboxLabel.innerText = `Checkbox for task ${editInput.value}`;
     editBtn.innerText = 'Edit';
     editBtn.ariaLabel = `Edit ${editInput.value} task`;
-    editBtn.focus();
     errorText.classList.remove('todo__error_visible');
   } else {
     announceTaskStatus(`Editing task: ${label.innerText}.`);
@@ -120,6 +119,8 @@ const editTask = function () {
 
   if (!isEditing) {
     editInput.focus();
+  } else {
+    editBtn.focus();
   }
 };
 
@@ -140,7 +141,6 @@ const taskCompleted = function () {
   const taskName = label.textContent;
 
   completedTasksHolder.append(listItem);
-  bindTaskEvents(listItem, taskIncomplete);
   announceTaskStatus(`${taskName} marked as completed.`);
 };
 
@@ -150,35 +150,37 @@ const taskIncomplete = function () {
   const taskName = label.textContent;
 
   incompleteTaskHolder.append(listItem);
-  bindTaskEvents(listItem, taskCompleted);
-  announceTaskStatus(`${taskName} marked as incompleted.`);
+  announceTaskStatus(`${taskName} marked as incomplete.`);
 };
 
 addButton.addEventListener('click', addTask);
 
-const bindTaskEvents = function (taskListItem, checkBoxEventHandler) {
-  const checkBox = taskListItem.querySelector('input[type=checkbox]');
-  const editButton = taskListItem.querySelector('.edit-btn');
-  const deleteButton = taskListItem.querySelector('.delete-btn');
-  const editInput = taskListItem.querySelector('.todo__input');
-  const errorText = taskListItem.querySelector('.todo__error');
+window.addEventListener('click', function (e) {
+  const editBtn = e.target.closest('.edit-btn');
+  const deleteBtn = e.target.closest('.delete-btn');
+  if (deleteBtn) {
+    deleteTask.call(e.target.closest('.delete-btn'));
+  } else if (editBtn) {
+    editTask.call(e.target.closest('.edit-btn'));
+  }
+});
 
-  editButton.addEventListener('click', function () {
-    editTask.call(this);
-  });
-
-  editInput.addEventListener('input', function () {
+window.addEventListener('input', function (e) {
+  const input = e.target.closest('.todo__input');
+  if (input?.value.trim()) {
+    const listItem = e.target.closest('.todo__item');
+    const errorText = listItem.querySelector('.todo__error');
     errorText.classList.remove('todo__error_visible');
-  });
+  }
+});
 
-  deleteButton.addEventListener('click', deleteTask);
-  checkBox.addEventListener('change', checkBoxEventHandler);
-};
-
-for (const task of incompleteTaskHolder.children) {
-  bindTaskEvents(task, taskCompleted);
-}
-
-for (const task of completedTasksHolder.children) {
-  bindTaskEvents(task, taskIncomplete);
-}
+window.addEventListener('change', function (e) {
+  const checkbox = e.target.closest('.todo__checkbox');
+  if (checkbox) {
+    if (checkbox.checked) {
+      taskCompleted.call(checkbox);
+    } else {
+      taskIncomplete.call(checkbox);
+    }
+  }
+});
