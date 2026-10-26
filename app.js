@@ -2,6 +2,11 @@ const taskInput = document.getElementById('new-task');
 const addButton = document.getElementById('add-new-task');
 const incompleteTaskHolder = document.getElementById('incomplete-tasks');
 const completedTasksHolder = document.getElementById('completed-tasks');
+const taskStatus = document.getElementById('task-status');
+
+const announceTaskStatus = function (message) {
+  taskStatus.textContent = message;
+};
 
 //New task list item
 const createNewTaskElement = function (taskString) {
@@ -71,6 +76,10 @@ const addTask = function () {
   incompleteTaskHolder.append(listItem);
   bindTaskEvents(listItem, taskCompleted);
 
+  const label = listItem.querySelector('.todo__label');
+  const taskName = label.textContent;
+  announceTaskStatus(`Created new task ${taskName}`);
+
   taskInput.value = '';
 };
 
@@ -93,11 +102,14 @@ const editTask = function () {
       return;
     }
     label.innerText = editInput.value;
+    announceTaskStatus(`Task was updated: ${editInput.value}.`);
     checkboxLabel.innerText = `Checkbox for task ${editInput.value}`;
     editBtn.innerText = 'Edit';
     editBtn.ariaLabel = `Edit ${editInput.value} task`;
+    editBtn.focus();
     errorText.classList.remove('todo__error_visible');
   } else {
+    announceTaskStatus(`Editing task: ${label.innerText}.`);
     editInput.value = label.innerText;
     checkboxLabel.innerText = `Checkbox for task ${editInput.value}`;
     editBtn.innerText = 'Save';
@@ -105,25 +117,41 @@ const editTask = function () {
   }
 
   listItem.classList.toggle('edit-mode');
+
+  if (!isEditing) {
+    editInput.focus();
+  }
 };
 
 //Delete task.
 const deleteTask = function () {
   const listItem = this.parentNode;
+  const label = listItem.querySelector('.todo__label');
+  const taskName = label.textContent;
+  announceTaskStatus(`Deleted task ${taskName}`);
+
   listItem.remove();
 };
 
 //Mark task completed
 const taskCompleted = function () {
   const listItem = this.parentNode;
+  const label = listItem.querySelector('.todo__label');
+  const taskName = label.textContent;
+
   completedTasksHolder.append(listItem);
   bindTaskEvents(listItem, taskIncomplete);
+  announceTaskStatus(`${taskName} marked as completed.`);
 };
 
 const taskIncomplete = function () {
   const listItem = this.parentNode;
+  const label = listItem.querySelector('.todo__label');
+  const taskName = label.textContent;
+
   incompleteTaskHolder.append(listItem);
   bindTaskEvents(listItem, taskCompleted);
+  announceTaskStatus(`${taskName} marked as incompleted.`);
 };
 
 addButton.addEventListener('click', addTask);
