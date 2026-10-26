@@ -33,6 +33,7 @@ const createNewTaskElement = function (taskString) {
   editInput.type = 'text';
   editInput.classList.add('todo__input');
   editInput.id = id;
+  editInput.value = taskString;
 
   const errorText = document.createElement('p');
   errorText.innerText = 'Task cannot be empty';
@@ -70,11 +71,10 @@ const createNewTaskElement = function (taskString) {
 const addTask = function () {
   //Create a new list item with the text from the #new-task:
   if (!taskInput.value.trim()) return;
-  const listItem = createNewTaskElement(taskInput.value);
+  const listItem = createNewTaskElement(taskInput.value.trim());
 
   //Append listItem to incompleteTaskHolder
   incompleteTaskHolder.append(listItem);
-  //bindTaskEvents(listItem, taskCompleted);
 
   const label = listItem.querySelector('.todo__label');
   const taskName = label.textContent;
