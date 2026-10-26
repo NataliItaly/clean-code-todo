@@ -6,6 +6,7 @@ const completedTasksHolder = document.getElementById('completed-tasks');
 //New task list item
 const createNewTaskElement = function (taskString) {
   const listItem = document.createElement('li');
+  listItem.classList.add('todo__item');
   const id = crypto.randomUUID();
 
   const checkboxLabel = document.createElement('label');
@@ -28,6 +29,10 @@ const createNewTaskElement = function (taskString) {
   editInput.classList.add('todo__input');
   editInput.id = id;
 
+  const errorText = document.createElement('p');
+  errorText.innerText = 'Task cannot be empty';
+  errorText.classList.add('todo__error');
+
   const editButton = document.createElement('button');
   editButton.innerText = 'Edit';
   editButton.className = 'edit-btn';
@@ -49,6 +54,7 @@ const createNewTaskElement = function (taskString) {
     checkBox,
     label,
     editInput,
+    errorText,
     editButton,
     deleteButton,
   );
@@ -72,18 +78,25 @@ const addTask = function () {
 
 const editTask = function () {
   const listItem = this.parentNode;
-
   const checkboxLabel = listItem.querySelector('label.hidden');
   const editInput = listItem.querySelector('input[type=text]');
   const label = listItem.querySelector('.todo__label');
   const editBtn = listItem.querySelector('.edit-btn');
-  const containsClass = listItem.classList.contains('edit-mode');
+  const errorText = listItem.querySelector('.todo__error');
 
-  if (containsClass) {
+  const isEditing = listItem.classList.contains('edit-mode');
+
+  if (isEditing) {
+    if (!editInput.value.trim()) {
+      errorText.classList.add('todo__error_visible');
+      editInput.focus();
+      return;
+    }
     label.innerText = editInput.value;
     checkboxLabel.innerText = `Checkbox for task ${editInput.value}`;
     editBtn.innerText = 'Edit';
     editBtn.ariaLabel = `Edit ${editInput.value} task`;
+    errorText.classList.remove('todo__error_visible');
   } else {
     editInput.value = label.innerText;
     checkboxLabel.innerText = `Checkbox for task ${editInput.value}`;
@@ -113,17 +126,25 @@ const taskIncomplete = function () {
   bindTaskEvents(listItem, taskCompleted);
 };
 
-addButton.onclick = addTask;
 addButton.addEventListener('click', addTask);
 
 const bindTaskEvents = function (taskListItem, checkBoxEventHandler) {
   const checkBox = taskListItem.querySelector('input[type=checkbox]');
   const editButton = taskListItem.querySelector('.edit-btn');
   const deleteButton = taskListItem.querySelector('.delete-btn');
+  const editInput = taskListItem.querySelector('.todo__input');
+  const errorText = taskListItem.querySelector('.todo__error');
 
-  editButton.onclick = editTask;
-  deleteButton.onclick = deleteTask;
-  checkBox.onchange = checkBoxEventHandler;
+  editButton.addEventListener('click', function () {
+    editTask.call(this);
+  });
+
+  editInput.addEventListener('input', function () {
+    errorText.classList.remove('todo__error_visible');
+  });
+
+  deleteButton.addEventListener('click', deleteTask);
+  checkBox.addEventListener('change', checkBoxEventHandler);
 };
 
 for (const task of incompleteTaskHolder.children) {

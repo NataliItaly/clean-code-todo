@@ -15,16 +15,6 @@ ul {
   padding: 0;
 }
 
-li {
-  list-style: none;
-  overflow: hidden;
-  padding: 20px 0;
-  border-bottom: 1px solid #eee;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 button {
   background: none;
   border: none;
@@ -114,6 +104,7 @@ input[type='text']:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .todo__checkbox {
@@ -128,6 +119,19 @@ input[type='text']:focus {
 
 .todo__input {
   display: none;
+}
+
+.todo__error {
+  position: absolute;
+  bottom: -5px;
+  color: red;
+  font-size: 14px;
+  padding-left: 43px;
+  display: none;
+}
+
+.todo__error_visible {
+  display: block;
 }
 
 .todo_completed .todo__label,
@@ -176,5 +180,9 @@ input[type='text']:focus {
 
   .todo__checkbox {
     margin: 0;
+  }
+
+  .todo__error {
+    padding-left: 23px;
   }
 }
