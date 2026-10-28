@@ -8,7 +8,6 @@ const announceTaskStatus = function (message) {
   taskStatus.textContent = message;
 };
 
-//New task list item
 const createNewTaskElement = function (taskString) {
   const listItem = document.createElement('li');
   listItem.classList.add('todo__item');
@@ -69,11 +68,9 @@ const createNewTaskElement = function (taskString) {
 };
 
 const addTask = function () {
-  //Create a new list item with the text from the #new-task:
   if (!taskInput.value.trim()) return;
   const listItem = createNewTaskElement(taskInput.value.trim());
 
-  //Append listItem to incompleteTaskHolder
   incompleteTaskHolder.append(listItem);
 
   const label = listItem.querySelector('.todo__label');
@@ -82,8 +79,6 @@ const addTask = function () {
 
   taskInput.value = '';
 };
-
-//Edit an existing task.
 
 const editTask = function () {
   const listItem = this.parentNode;
@@ -124,7 +119,6 @@ const editTask = function () {
   }
 };
 
-//Delete task.
 const deleteTask = function () {
   const listItem = this.parentNode;
   const label = listItem.querySelector('.todo__label');
@@ -134,7 +128,6 @@ const deleteTask = function () {
   listItem.remove();
 };
 
-//Mark task completed
 const taskCompleted = function () {
   const listItem = this.parentNode;
   const label = listItem.querySelector('.todo__label');
