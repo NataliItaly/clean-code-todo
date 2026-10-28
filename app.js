@@ -128,22 +128,20 @@ const deleteTask = function () {
   listItem.remove();
 };
 
-const taskCompleted = function () {
-  const listItem = this.parentNode;
+const moveTask = function (listItem, destination, status) {
   const label = listItem.querySelector('.todo__label');
   const taskName = label.textContent;
 
-  completedTasksHolder.append(listItem);
-  announceTaskStatus(`${taskName} marked as completed.`);
+  destination.append(listItem);
+  announceTaskStatus(`${taskName} marked as ${status}.`);
+};
+
+const taskCompleted = function () {
+  moveTask(this.parentNode, completedTasksHolder, 'completed');
 };
 
 const taskIncomplete = function () {
-  const listItem = this.parentNode;
-  const label = listItem.querySelector('.todo__label');
-  const taskName = label.textContent;
-
-  incompleteTaskHolder.append(listItem);
-  announceTaskStatus(`${taskName} marked as incomplete.`);
+  moveTask(this.parentNode, incompleteTaskHolder, 'incomplete');
 };
 
 addButton.addEventListener('click', addTask);
